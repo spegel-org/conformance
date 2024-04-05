@@ -1,0 +1,30 @@
+diff --git a/conformance/setup.go b/conformance/setup.go
+index 50ff4c8..b267e6d 100644
+--- a/conformance/setup.go
++++ b/conformance/setup.go
+@@ -77,6 +77,7 @@ const (
+ 	envVarCrossmountNamespace       = "OCI_CROSSMOUNT_NAMESPACE"
+ 	envVarAutomaticCrossmount       = "OCI_AUTOMATIC_CROSSMOUNT"
+ 	envVarReportDir                 = "OCI_REPORT_DIR"
++	envVarMirrorURL                 = "OCI_MIRROR_URL"
+ 
+ 	emptyLayerTestTag = "emptylayer"
+ 	testTagName       = "tagtest0"
+@@ -185,6 +186,8 @@ func init() {
+ 		crossmountNamespace = fmt.Sprintf("conformance-%s", uuid.New())
+ 	}
+ 
++	mirrorURL := os.Getenv(envVarMirrorURL)
++
+ 	debug, _ := strconv.ParseBool(os.Getenv(envVarDebug))
+ 
+ 	for envVar, enableTest := range testMap {
+@@ -209,6 +212,8 @@ func init() {
+ 	client.SetLogger(logger)
+ 	client.SetCookieJar(nil)
+ 
++	client.SetQueryParam("ns", mirrorURL)
++
+ 	// create a unique config for each workflow category
+ 	for i := 0; i < numWorkflows; i++ {
+ 
