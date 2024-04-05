@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v4
+        with:        
+          submodules: true
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
       - name: Setup Docker Buildx
