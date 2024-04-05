@@ -49,7 +49,6 @@ jobs:
           push: true
           builder: ${{ steps.buildx.outputs.name }}
           context: ./distribution-spec/conformance
-          file: Dockerfile
           platforms: linux/amd64,linux/arm64
           tags: ghcr.io/spegel-org/conformance:${{ steps.prep.outputs.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
